@@ -67,12 +67,59 @@ const testimonials = [
   },
 ];
 
+const galleryItems = [
+  {
+    id: 1,
+    image: 'https://cdn.poehali.dev/projects/d4a23b2f-e97d-4210-93ed-2873e7dbda2b/files/6ec1651a-5244-450e-b440-d087517cbfe1.jpg',
+    category: 'Покрытие',
+    title: 'Розовый маникюр с глиттером',
+  },
+  {
+    id: 2,
+    image: 'https://cdn.poehali.dev/projects/d4a23b2f-e97d-4210-93ed-2873e7dbda2b/files/cc1b015c-a1b8-4ba7-86e7-ab46438ee07e.jpg',
+    category: 'Френч',
+    title: 'Классический френч',
+  },
+  {
+    id: 3,
+    image: 'https://cdn.poehali.dev/projects/d4a23b2f-e97d-4210-93ed-2873e7dbda2b/files/70ac386a-c1da-4704-8de8-0979f2036d14.jpg',
+    category: 'Дизайн',
+    title: 'Градиент с цветами',
+  },
+  {
+    id: 4,
+    image: 'https://cdn.poehali.dev/projects/d4a23b2f-e97d-4210-93ed-2873e7dbda2b/files/ee6a3a58-8b5f-49af-a520-079a8b5c283c.jpg',
+    category: 'Покрытие',
+    title: 'Элегантный дизайн',
+  },
+  {
+    id: 5,
+    image: 'https://cdn.poehali.dev/projects/d4a23b2f-e97d-4210-93ed-2873e7dbda2b/files/f95a136a-fae1-49b1-aedd-c31007c8fbee.jpg',
+    category: 'Дизайн',
+    title: 'Современный стиль',
+  },
+  {
+    id: 6,
+    image: 'https://cdn.poehali.dev/projects/d4a23b2f-e97d-4210-93ed-2873e7dbda2b/files/6ec1651a-5244-450e-b440-d087517cbfe1.jpg',
+    category: 'Френч',
+    title: 'Нюдовый френч',
+  },
+];
+
 export default function Index() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     message: '',
   });
+  const [selectedCategory, setSelectedCategory] = useState('Все');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const categories = ['Все', 'Покрытие', 'Френч', 'Дизайн'];
+  
+  const filteredGallery = selectedCategory === 'Все' 
+    ? galleryItems 
+    : galleryItems.filter(item => item.category === selectedCategory);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -90,6 +137,9 @@ export default function Index() {
             </button>
             <button onClick={() => scrollToSection('services')} className="text-sm font-medium hover:text-primary transition-colors">
               Услуги
+            </button>
+            <button onClick={() => scrollToSection('gallery')} className="text-sm font-medium hover:text-primary transition-colors">
+              Работы
             </button>
             <button onClick={() => scrollToSection('reviews')} className="text-sm font-medium hover:text-primary transition-colors">
               Отзывы
@@ -184,7 +234,84 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="reviews" className="py-20 px-4">
+      <section id="gallery" className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Наши работы</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Примеры работ наших мастеров — от классики до авторских дизайнов
+            </p>
+          </div>
+
+          <div className="flex justify-center gap-3 mb-12 flex-wrap animate-fade-in">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                className={selectedCategory === category ? 'bg-primary hover:bg-primary/90' : ''}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {filteredGallery.map((item, idx) => (
+              <div
+                key={item.id}
+                className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer hover-scale animate-scale-in"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+                onClick={() => setSelectedImage(item.image)}
+              >
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <div className="inline-block px-3 py-1 bg-primary/80 rounded-full text-xs font-medium mb-2">
+                      {item.category}
+                    </div>
+                    <h3 className="text-xl font-serif font-bold">{item.title}</h3>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button onClick={() => scrollToSection('contacts')} size="lg" className="bg-primary hover:bg-primary/90">
+              Записаться на маникюр
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            <Icon name="X" className="w-6 h-6 text-white" />
+          </button>
+          <img
+            src={selectedImage}
+            alt="Full size"
+            className="max-w-full max-h-[90vh] object-contain rounded-lg animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
+      <section id="reviews" className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Отзывы клиентов</h2>
