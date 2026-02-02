@@ -473,13 +473,12 @@ export default function Index() {
             <div>
               <h4 className="font-semibold mb-4">Социальные сети</h4>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors">
-                  <Icon name="Instagram" className="w-5 h-5" />
+                <a href="https://vk.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.45 15.24c-.37.7-1.1 1.11-2.17 1.21-.39.03-.82.05-1.29.05-1.58 0-3.37-.27-5.06-2.03-2.38-2.48-3.42-5.81-2.8-8.95.19-.97.67-1.79 1.35-2.31.57-.43 1.24-.65 1.99-.65.18 0 .36.01.54.04.69.11 1.28.51 1.68 1.13.18.28.33.6.47.95.44 1.11.74 1.86 1.5 1.86.19 0 .39-.05.6-.17.86-.48.94-1.73.94-2.18 0-.83-.14-1.46-.83-1.78-.28-.13-.37-.18-.37-.34 0-.21.17-.38.45-.38h.09c.82 0 1.46.28 1.85.82.36.49.54 1.18.54 2.05 0 .85-.17 2.24-1.52 2.97.36.37 1.23 1.51 2.44 3.06.43.56.66.99.66 1.24 0 .45-.34.79-.93.94z"/>
+                  </svg>
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors">
-                  <Icon name="Facebook" className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors">
+                <a href="tel:+79787900402" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors">
                   <Icon name="Phone" className="w-5 h-5" />
                 </a>
               </div>
